@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title>Cliente</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="materialize/css/style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-wrapper" style="background-color: white">
+        <a href="#" class="brand-logo center" style="color: black;" name="title">Mega Instalações</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a href="/inicio" style="color: black;">HOME</a></li>
+            <li><a href="/clientes" style="color: black;">LISTA DE CLIENTES</a></li>
+            <li><a href="/cadastro" style="color: black;">CADASTRAR CLIENTE</a></li>
+        </ul>
+    </div>
+</nav>
+<br>
+
+<div class="container tableCliente">
+
+    <div style="float: right;"><a th:href="@{/clientes}"><i class="medium material-icons">reply</i></a></div>
+    <h4>Cliente</h4>
+        <table>
+                <tr>
+                    <th>Nome</th>
+                    <td th:text="${cliente.nome}"></td>
+                </tr>
+
+                <tr>
+                    <th>Telefone</th>
+                    <td th:text="${cliente.telefone}"></td>
+                </tr>
+
+                <tr>
+                    <th>Bairro</th>
+                    <td th:text="${cliente.bairro}"></td>
+                </tr>
+
+                <tr>
+                    <th>Endereço</th>
+                    <td th:text="${cliente.endereco}"></td>
+                </tr>
+
+                <tr>
+                    <th>Data De Cadastro</th>
+                    <td th:text="${cliente.dataCadastro}"></td>
+                </tr>
+
+        </table>
+
+    <br>
+        <h5 id="tituloCardServico" name="titleServico">Serviços</h5>
+<br>
+            <div class="linha">
+
+                <div class="card" id="serviceCard" th:each="servico : ${servicos}" >
+
+                    <div><a><i class="material-icons" id="servicoIcon">work</i></a></div>
+                    <h4><span th:text="${servico.nomeServico}" id="servicoName"></span></h4>
+                    <h5><span th:text="${servico.dateService}" id="servicoDate"></span></h5>
+                    <div><a th:href="${(#mvc.url('CC#encontrarServico').arg(0, servico.identificador)).build()}"><i id="contatoServico" class="material-icons">info</i></a> </div>
+                    <div><a th:href="@{/deletarServico(identificador = ${servico.identificador}, id=${cliente.id})}"><i id="deletarServico" class="material-icons">delete</i></a> </div>
+
+                </div>
+
+            </div>
+
+    <h5 style="text-align: center; color: red;"><span th:text="${msg}"></span></h5>
+    <br>
+
+    <h5 id="tituloServico">Adicionar Serviço ao Cliente</h5>
+    <br>
+
+    <div class="container formCliente">
+
+        <div id="validMsg" style="text-align: center; font-size:13pt; position:relative; bottom:0px;">
+            <th:block th:include="validationMsg"></th:block>
+        </div>
+
+        <script>
+                let validMsg = document.getElementById("validMsg");
+
+                if(validMsg.innerText == "Sucesso!"){
+
+                    validMsg.style.color="green";
+                    window.onload = function(){document.titleServico.focus();}
+
+                }
+                else{
+                    validMsg.style.color="red";
+
+                }
+            </script>
+
+        <form method="post" th:action="@{/{id}(id = ${cliente.id})}">
+
+            Nome Do Serviço: <input type="text" name="nomeServico" required>
+
+            Descrição: <textarea name="desServico"  class="materialize-textarea" required></textarea>
+
+            <button type="submit" class="waves-effect waves-light btn">Adicionar</button>
+
+        </form>
+
+    </div>
+
+    </div>
+
+<footer class="page-footer" id="footerClientePage">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">MEGA INSTALAÇÕES</h5>
+                <p class="grey-text text-lighten-4">ENTRE EM CONTATO COM NOSSOS DESENVOLVEDORES!</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">TELEGRAM</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">GIT HUB</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">LINKEDIN</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+    </div>
+</footer>
+
+
+<script type="text/javascript" src="js/materialize.min.js"></script>
+
+</body>
+</html>

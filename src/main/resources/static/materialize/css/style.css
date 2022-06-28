@@ -1,0 +1,261 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #fafafa;
+}
+
+.linha {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card h2 {
+ font-size: 20pt;
+}
+
+.card h3 {
+ font-size: 15pt;
+ color: grey;
+}
+
+#lucro{
+border-left: 3px solid #3bb54a;
+padding:5px;
+height:110px;
+width: 200px;
+flex-wrap: wrap;
+position:relative;
+}
+
+#sumario{
+border-left: 3px solid #b3404a;
+padding:5px;
+width: 300px;
+position:relative;
+float: right;
+}
+
+#serviceCard{
+border-left: 3px solid #1d01f6;
+width: 250px;
+height: 135px;
+}
+
+#servicoDate{
+position:relative;
+bottom: 20px;
+font-size: 15pt;
+color: grey;
+}
+
+#contatoServico{
+float: right;
+position:relative;
+bottom: 20px;
+}
+
+#deletarServico{
+color: #b3404a;
+position:relative;
+bottom: 20px;
+}
+
+#all{
+float: right;}
+
+#image-help{
+float: right;
+}
+
+#sumario-delete{
+color:#b3404a;
+position:relative;
+top:5px;
+}
+
+#sumario-info{
+position:relative;
+top:5px;
+}
+
+#image-money{
+float: right;
+color: #3bb54a;
+position:relative;
+}
+
+#valor{
+position:relative;
+bottom:30px;
+color: #3bb54a;
+}
+
+#titulo{
+position:relative;
+bottom: 20px;
+
+}
+
+.card {
+  border-radius: 5px;
+  box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
+  padding: 5px;
+  margin: 10px;
+  width: 180px;
+  transition: all 0.3s ease-out;
+  border-left: 3px solid #4895ff;
+  background-color: #fbfafb;
+  position:relative;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  cursor: pointer;
+}
+
+.card p {
+  color: #fbfbfa;
+  font-size: 16px;
+}
+
+#contato{
+float: right;
+}
+
+#contacts{
+position:relative;
+float: right;
+}
+
+#deletar{
+color: #b3404a;
+}
+
+.formCliente{
+box-shadow: 0px 0px 5px grey;
+padding-top:20px;
+padding-left:20px;
+padding-bottom: 20px;
+margin-bottom: 60px;
+}
+
+.tableCliente{
+box-shadow: 0px 0px 5px grey;
+padding-top:20px;
+padding-left:20px;
+padding-bottom: 20px;
+margin-bottom: 60px;
+width: 90%;
+}
+
+#servicoName{
+position:relative;
+bottom:10px;
+font-size: 18pt;
+}
+
+#tituloServico{
+position:relative;
+text-align: center;
+}
+
+#tituloCardServico{
+position:relative;
+text-align: center;
+}
+
+#servicoIcon{
+position:relative;
+float: right;
+color: #615c5a;
+}
+
+#text{
+position:relative;
+bottom:0px;
+color: green;
+}
+
+#finalizarServicoValor{
+position:relative;
+left: 200px;
+bottom:80px;
+}
+
+#txtFinalizar{
+position:relative;
+bottom: 50px;
+}
+
+#txt{
+font-size: 13pt;
+}
+#txt2{
+font-size: 13pt;
+}
+
+#custoFinalBody{
+box-shadow: 0px 0px 5px grey;
+padding-top:20px;
+padding-left:30px;
+padding-bottom: 20px;
+margin-bottom: 60px;
+width: 90%;
+position: relative;
+top: 60px;
+display: flex;
+margin: auto;
+}
+
+#custoFinal{
+color: green;
+font-size: 14pt;
+position: relative;
+left: 70px;
+}
+
+#custoFinalMateriais{
+color: red;
+font-size: 14pt;
+}
+
+#custoMaoDeObra{
+color: lightred;
+font-size: 14pt;
+position: relative;
+left: 40px;
+}
+
+.cardServices{
+
+  border-radius: 5px;
+  box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
+  padding: 5px;
+  margin: 10px;
+  width: 270px;
+  transition: all 0.3s ease-out;
+  border-left: 3px solid #4895ff;
+  background-color: #fbfafb;
+  position:relative;
+}
+
+#footer{
+position:relative;
+top:0px;
+background-color: #3b3e45;
+}
+
+#footerClientePage{
+position:relative;
+top:80px;
+background-color: #3b3e45;
+}
+
+.txt-clientes{
+font-size: 15pt;
+position:relative;
+left: 10px;
+bottom:10px;
+}
+
+

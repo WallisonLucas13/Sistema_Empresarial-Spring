@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title>Serviço</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="materialize/css/style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-wrapper" style="background-color: white">
+        <a href="#" class="brand-logo center" style="color: black;">Mega Instalações</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a href="/inicio" style="color: black;">HOME</a></li>
+            <li><a href="/clientes" style="color: black;">LISTA DE CLIENTES</a></li>
+            <li><a href="/cadastro" style="color: black;">CADASTRAR CLIENTE</a></li>
+        </ul>
+    </div>
+</nav>
+<br>
+
+<div class="container tableCliente">
+
+    <div style="float: right;"><a th:href="@{/{id}(id=${idCliente})}"><i class="medium material-icons">reply</i></a></div>
+    <h5 id="tituloServicoPage">Serviço</h5>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <td th:text="${service.nomeServico}"></td>
+        </tr>
+
+        <tr>
+            <th>Descrição</th>
+            <td th:text="${service.desServico}"></td>
+        </tr>
+
+        <tr>
+            <th>Data De Cadastro</th>
+            <td th:text="${service.dateService}"></td>
+        </tr>
+
+    </table>
+
+    <br>
+
+    <h4 id="tituloServico">Materiais</h4>
+    <br>
+    <table class="centered">
+
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Custo Total</th>
+                <th>Deletar</th>
+            </tr>
+        </thead>
+
+        <tbody th:each="material : ${materiais}">
+
+            <tr>
+                <td><span th:text="${material.nomeMaterial}"></span></td>
+
+                <td><span th:text="${material.valorMaterial}"></span></td>
+
+                <td><span th:text="${material.quantMaterial}"></span></td>
+
+                <td><span th:text="${material.custoTotal}"></span></td>
+
+                <td><a th:href="@{/deletarMaterial(iden = ${material.id}, id = ${service.identificador})}"><i id="deletar" class="material-icons">delete</i></a></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <br>
+    <h5 style="text-align: center; color: red;"><span th:text="${msg}"></span></h5>
+
+    <h6 style="text-align: center; color:green;" id="custo">Custo Total dos Materiais: <span th:text="${custoTotalServico}"></span></h6>
+    <br>
+
+    <div class="container formCliente">
+
+        <h5 id="tituloMaterial">Material</h5>
+
+        <div id="validMsg" style="text-align: center; font-size:13pt; position:relative; bottom:30px;">
+            <th:block th:include="validationMsg"></th:block>
+        </div>
+
+        <script>
+                let validMsg = document.getElementById("validMsg");
+
+                if(validMsg.innerText == "Insira todos os Campos!"){
+
+                    window.onload = function(){
+                        document.Materialform.nomeMaterial.focus();
+                    }
+                     validMsg.innerText = "Insira um nome!";
+                     validMsg.style.color="red";
+
+
+                }
+                if(validMsg.innerText == "Sucesso!"){
+
+                    validMsg.style.color="green";
+                    window.onload = function(){
+                        document.Materialform.nomeMaterial.focus();
+                    }
+                }
+
+            </script>
+
+        <form method="post" name="Materialform" th:action="@{/service-{identificador}(identificador = ${service.identificador})}">
+            <div class="row">
+
+                <div class="input-field col s5">
+                    Nome Do Material: <input type="text" name="nomeMaterial" required>
+                </div>
+
+                <div class="input-field col s2">
+                    Quantidade: <input type="number" name="quantMaterial" value="1" required>
+                </div>
+
+                <div class="input-field col s2">
+                    Preço: <input type="number" name="valorMaterial" value="0" required>
+                </div>
+
+            </div>
+
+
+            <button type="submit" class="waves-effect waves-light btn">Adicionar Material Ao Serviço</button>
+
+        </form>
+
+
+    </div>
+
+    <form method="post" th:action="@{/service-valor}">
+
+    <div class="row">
+        <div class="input-field col s2">
+            Insira o valor da Mão de Obra: <input type="number" onkeyup="calcular()" id="input" name="valor" required>
+            <input type="hidden" th:value="${service.identificador}" name="id">
+        </div>
+    </div>
+
+        <button type="submit" class="waves-effect waves-light btn" id="finalizarServicoValor">Finalizar</button>
+
+    </form>
+
+    <input type="hidden" th:value="${custoTotalServico}" id="custoServico" name="custo">
+
+    <div id="txtFinalizar">
+    <p id="txt">O valor inserido é somado com o custo total dos materiais, <b>clique em Finalizar para Salvar no Sistema!</b></p>
+        <p id="txt2"> <b>Após</b> inserir o valor, abaixo você obtem uma estimativa do custo total do Serviço!</p>
+        <h6 id="text"></h6>
+
+        <div id="custoFinalBody">
+
+        <h5 id="custoFinalMateriais">Custo Materiais: <span th:text="${custoTotalMateriais}"></span></h5>
+            <h5 id="custoMaoDeObra"> Custo Mão de Obra: <span th:text="${maoDeObra}"></span></h5>
+            <h5 id="custoFinal"> Custo Final do Serviço: <span th:text="${custoFinal}"></span></h5>
+        </div>
+
+        </div>
+    <br>
+
+</div>
+
+<footer class="page-footer" id="footerClientePage">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">MEGA INSTALAÇÕES</h5>
+                <p class="grey-text text-lighten-4">ENTRE EM CONTATO COM NOSSOS DESENVOLVEDORES!</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">TELEGRAM</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">GIT HUB</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">LINKEDIN</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+    </div>
+</footer>
+
+
+<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="materialize/js/script.js"></script>
+</body>
+
+</html>
+
