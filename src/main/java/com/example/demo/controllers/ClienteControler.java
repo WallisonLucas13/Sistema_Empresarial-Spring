@@ -229,8 +229,15 @@ public class ClienteControler {
 
     @GetMapping("/deletarServico")
     public String deleteServico(Long identificador){
+        Cliente cliente = clienteService.encontrarClientePorId(iden);
+        Servico servico = servicoService.encontrarServicoPorId(identificador);
+
+        List<Servico> lista = cliente.getServicos();
+        lista.remove(servico);
+        cliente.setServicos(lista);
 
         servicoService.deletarServicoPorId(identificador);
+        clienteService.salvarCliente(cliente);
         return "redirect:/" + iden;
     }
 
@@ -243,7 +250,7 @@ public class ClienteControler {
         List<Material> materiaisTest = servico.getMateriais();
 
         materiaisTest.remove(material);
-        
+
         servico.setMateriais(materiaisTest);
 
         materialService.deletarMaterialPorId(iden);
