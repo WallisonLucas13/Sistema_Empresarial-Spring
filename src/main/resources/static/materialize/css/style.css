@@ -30,7 +30,7 @@ position:relative;
 #sumario{
 border-left: 3px solid #b3404a;
 padding:2px;
-width: 600px;
+width: 620px;
 height: 120px;
 border-radius: 30px;
 position: relative;
@@ -81,7 +81,7 @@ top: 5px;
 #sumario-delete{
 color:#b3404a;
 position:relative;
-bottom: 45px;
+bottom: 25px;
 }
 #string-delete-sumario{
 position:relative;
@@ -90,7 +90,7 @@ bottom:45px;
 
 #sumario-info{
 position:relative;
-bottom: 50px;
+bottom: 30px;
 }
 #string-info-sumario{
 position:relative;
