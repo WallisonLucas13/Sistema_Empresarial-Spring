@@ -81,12 +81,20 @@ top: 5px;
 #sumario-delete{
 color:#b3404a;
 position:relative;
-bottom: 50px;
+bottom: 45px;
+}
+#string-delete-sumario{
+position:relative;
+bottom:45px;
 }
 
 #sumario-info{
 position:relative;
-bottom: 60px;
+bottom: 50px;
+}
+#string-info-sumario{
+position:relative;
+bottom:50px;
 }
 
 #image-money{
