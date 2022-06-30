@@ -38,17 +38,6 @@
 <h5 style="text-align: center; color: #b3404a;"><span th:text="${msg}"></span></h5>
 
     <br>
-    <div id="sumario" class="card">
-
-        <div><a><i class="material-icons" id="image-help">help_outline</i></a></div>
-        <h2 id="sumario-titulo">Sumário</h2>
-        <div><a><i class="material-icons" id="sumario-delete">delete</i></a>--> Apaga um cliente de forma permanente!</div>
-        <br>
-        <div><a><i class="material-icons" id="sumario-info">info</i></a>--> Obtenha todas as Informações do cliente e tenha acesso aos Serviços fornecidos ao mesmo ou cadastre novos Serviços!</div>
-        <br>
-
-    </div>
-
 <div class="linha">
 
     <div class="card" th:each="cliente : ${clientes}">
@@ -61,6 +50,19 @@
         <div><a th:href="${(#mvc.url('CC#delete').arg(0, cliente.id)).build()}"><i id="deletar" class="material-icons">delete</i></a> </div>
     </div>
 </div>
+
+    <br>
+    <div id="sumario" class="card">
+
+        <div><a><i class="material-icons" id="image-help">help_outline</i></a></div>
+        <h2 id="sumario-titulo">Sumário</h2>
+        <div><a><i class="material-icons" id="sumario-delete">delete</i></a>--> Apaga um cliente de forma permanente!</div>
+        <br>
+        <div><a><i class="material-icons" id="sumario-info">info</i></a>--> Obtenha todas as Informações do cliente e tenha acesso aos Serviços fornecidos ao mesmo ou cadastre novos Serviços!</div>
+        <br>
+
+    </div>
+
 </div>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>

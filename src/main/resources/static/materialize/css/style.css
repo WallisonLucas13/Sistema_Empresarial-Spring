@@ -29,9 +29,9 @@ position:relative;
 
 #sumario{
 border-left: 3px solid #b3404a;
-padding:5px;
-width: 300px;
-float: right;
+padding:2px;
+width: 350px;
+float: center;
 }
 
 #serviceCard{
