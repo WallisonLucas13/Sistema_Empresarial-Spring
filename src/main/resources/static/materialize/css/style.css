@@ -30,7 +30,7 @@ position:relative;
 #sumario{
 border-left: 3px solid #b3404a;
 padding:2px;
-width: 620px;
+width: 650px;
 height: 120px;
 border-radius: 30px;
 position: relative;
@@ -40,7 +40,7 @@ top: 10px;
 #sumario-titulo{
 font-size: 16pt;
 position:relative;
-bottom: 20px;
+bottom: 25px;
 }
 
 #serviceCard{
