@@ -237,9 +237,17 @@ public class ClienteControler {
     @GetMapping("/deletarMaterial")
     public String deleteMaterial(Long iden){
 
+        Servico servico = servicoService.encontrarServicoPorId(idService);
+        Material material = materialService.buscarMaterialPorId(iden);
+
+        List<Material> materiaisTest = servico.getMateriais();
+
+        materiaisTest.remove(material);
+        
+        servico.setMateriais(materiaisTest);
+
         materialService.deletarMaterialPorId(iden);
 
-        Servico servico = servicoService.encontrarServicoPorId(idService);
         List<Material> materiais = servico.getMateriais();
 
         String res = somarCustoTotalServico(calcularCustoTotal(materiais));
