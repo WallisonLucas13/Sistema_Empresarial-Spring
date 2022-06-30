@@ -72,7 +72,7 @@
                     <h4><span th:text="${servico.nomeServico}" id="servicoName"></span></h4>
                     <h5><span th:text="${servico.dateService}" id="servicoDate"></span></h5>
                     <div><a th:href="${(#mvc.url('CC#encontrarServico').arg(0, servico.identificador)).build()}"><i id="contatoServico" class="material-icons">info</i></a> </div>
-                    <div><a th:href="@{/deletarServico(identificador = ${servico.identificador}, id=${cliente.id})}"><i id="deletarServico" class="material-icons">delete</i></a> </div>
+                    <div><a th:href="${(#mvc.url('CC#deleteServico').arg(0, servico.identificador)).build()}"><i id="deletarServico" class="material-icons">delete</i></a> </div>
 
                 </div>
 

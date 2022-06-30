@@ -37,6 +37,8 @@ public class ClienteControler {
 
     int maoDeObra = 0;
     int materiaisValor = 0;
+    Long iden = 0L;
+    Long idService = 0L;
 
     @GetMapping("/inicio")
     public String inicio(){
@@ -86,8 +88,6 @@ public class ClienteControler {
         return mv;
     }
 
-    Long iden = 0L;
-
     @GetMapping("/{id}")
     public ModelAndView encontrarCliente(@PathVariable("id") Long id){
         if(id == 0L){
@@ -136,6 +136,7 @@ public class ClienteControler {
     @GetMapping("/service-{identificador}")
     public ModelAndView encontrarServico(@PathVariable("identificador") Long identificador){
 
+        idService = identificador;
         ModelAndView mv = new ModelAndView("servicePage");
         Servico service = servicoService.encontrarServicoPorId(identificador);
         List<Material> materiais = service.getMateriais();
@@ -227,27 +228,25 @@ public class ClienteControler {
     }
 
     @GetMapping("/deletarServico")
-    public String deleteServico(@RequestParam(name="identificador") Long identificador,
-                                @RequestParam(name = "id") Long id){
+    public String deleteServico(Long identificador){
 
         servicoService.deletarServicoPorId(identificador);
-        return "redirect:/" + id;
+        return "redirect:/" + iden;
     }
 
     @GetMapping("/deletarMaterial")
-    public String deleteMaterial(@RequestParam(name = "iden") Long iden,
-                                 @RequestParam(name = "id") Long id){
+    public String deleteMaterial(Long iden){
 
         materialService.deletarMaterialPorId(iden);
 
-        Servico servico = servicoService.encontrarServicoPorId(id);
+        Servico servico = servicoService.encontrarServicoPorId(idService);
         List<Material> materiais = servico.getMateriais();
 
         String res = somarCustoTotalServico(calcularCustoTotal(materiais));
 
         servico.setTotalMateriais(res);
         servicoService.salvarServico(servico);
-        return "redirect:/service-" + id;
+        return "redirect:/service-" + idService;
     }
 
     private Cliente clonarClienteComServicosAtualizado(Servico servico, Cliente clienteAtual){
