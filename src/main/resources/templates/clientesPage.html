@@ -27,6 +27,8 @@
         </ul>
     </div>
 </nav>
+
+<div class="container tableClientes">
 <h4 style="text-align: center;">Clientes</h4>
 <br>
 <p class="txt-clientes">Aqui você encontra todos os clientes cadastrados no Sistema!, siga o sumário para descobrir tudo que você pode fazer!</p>
@@ -57,7 +59,7 @@
         <div><a th:href="${(#mvc.url('CC#delete').arg(0, cliente.id)).build()}"><i id="deletar" class="material-icons">delete</i></a> </div>
     </div>
 </div>
-
+</div>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>

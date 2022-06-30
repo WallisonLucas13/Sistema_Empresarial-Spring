@@ -148,6 +148,15 @@ margin-bottom: 60px;
 width: 90%;
 }
 
+.tableClientes{
+box-shadow: 0px 0px 5px grey;
+padding-top:20px;
+padding-left:20px;
+padding-bottom: 20px;
+margin-bottom: 60px;
+width: 95%;
+}
+
 #servicoName{
 position:relative;
 bottom:10px;
