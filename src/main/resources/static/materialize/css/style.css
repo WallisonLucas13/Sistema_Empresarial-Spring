@@ -30,8 +30,9 @@ position:relative;
 #sumario{
 border-left: 3px solid #b3404a;
 padding:2px;
-width: 550px;
-border-radius: 15px;
+width: 600px;
+height: 300px;
+border-radius: 30px;
 position: relative;
 top: 10px;
 }
