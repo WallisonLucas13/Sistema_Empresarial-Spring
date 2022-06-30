@@ -16,8 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -42,7 +40,6 @@ public class ClienteControler {
 
     @GetMapping("/inicio")
     public String inicio(){
-        log.info("Pedindo a Home do Sistema");
         return "home";
     }
 
@@ -58,10 +55,12 @@ public class ClienteControler {
     }
 
     @PostMapping("/cadastro")
-    public String salvar_dados_pagina_cadastro(@Valid Cliente cliente, BindingResult res, RedirectAttributes attributes){
+    public String salvar_dados_pagina_cadastro(@Valid Cliente cliente
+            , BindingResult res, RedirectAttributes attributes){
 
         if(res.hasErrors()){
-            attributes.addFlashAttribute("mensagem", "Insira todos os Campos!");
+            attributes
+                    .addFlashAttribute("mensagem", "Insira todos os Campos!");
             return "redirect:/cadastro";
         }
 
@@ -74,6 +73,7 @@ public class ClienteControler {
 
     @GetMapping("/clientes")
     public ModelAndView listarClientes(){
+
         ModelAndView mv = new ModelAndView("clientesPage");
         List<Cliente> clientes = clienteService.listarClientes();
 
@@ -90,10 +90,12 @@ public class ClienteControler {
 
     @GetMapping("/{id}")
     public ModelAndView encontrarCliente(@PathVariable("id") Long id){
+
         if(id == 0L){
             ModelAndView mvif = new ModelAndView("home");
             return mvif;
         }
+
 
         ModelAndView mv = new ModelAndView("clientePage");
         Cliente cliente = clienteService.encontrarClientePorId(id);
@@ -114,12 +116,13 @@ public class ClienteControler {
     }
 
     @PostMapping("/{id}")
-    public String atribuirServico_E_Material(@PathVariable("id") Long id,
+    public String atribuirServico(@PathVariable("id") Long id,
                                              @Valid Servico s, BindingResult res,
                                              RedirectAttributes attributes){
 
         if(res.hasErrors()){
-            attributes.addFlashAttribute("mensagem", "Insira todos os Campos!");
+            attributes
+                    .addFlashAttribute("mensagem", "Insira todos os Campos!");
             return "redirect:/{id}";
         }
 
@@ -127,23 +130,30 @@ public class ClienteControler {
         servicoService.salvarServico(s);
 
         Cliente cliente = clienteService.encontrarClientePorId(id);
+        List<Servico> lista = cliente.getServicos();
+        lista.add(s);
+        cliente.setServicos(lista);
 
-        clienteService.salvarCliente(clonarClienteComServicosAtualizado(s, cliente));
+        clienteService.salvarCliente(cliente);
         attributes.addFlashAttribute("mensagem", "Sucesso!");
         return "redirect:/{id}";
     }
 
     @GetMapping("/service-{identificador}")
     public ModelAndView encontrarServico(@PathVariable("identificador") Long identificador){
-
         idService = identificador;
+
         ModelAndView mv = new ModelAndView("servicePage");
         Servico service = servicoService.encontrarServicoPorId(identificador);
         List<Material> materiais = service.getMateriais();
 
 
-        int maoDeObra = Integer.valueOf(service.getMaoDeObra().replace("R$ ", ""));
-        int materiaisValorTotal = Integer.valueOf(service.getTotalMateriais().replace("R$ ", ""));
+        int maoDeObra = Integer
+                .valueOf(service.getMaoDeObra().replace("R$ ", ""));
+
+        int materiaisValorTotal = Integer
+                .valueOf(service.getTotalMateriais().replace("R$ ", ""));
+
         service.setCustoServicoFinal("R$ " + String.valueOf(maoDeObra + materiaisValorTotal));
 
         servicoService.salvarServico(service);
@@ -166,13 +176,13 @@ public class ClienteControler {
     }
 
     @PostMapping("/service-{identificador}")
-    public String atribuirMaterial_Ao_Servico(Material material,
+    public String atribuirMaterial(Material material,
                                               @PathVariable("identificador") Long identificador,
                                               BindingResult res, RedirectAttributes attributes){
 
         if(material.getNomeMaterial().isEmpty()){
-
-            attributes.addFlashAttribute("mensagem", "Insira todos os Campos!");
+            attributes
+                    .addFlashAttribute("mensagem", "Insira todos os Campos!");
             return "redirect:/service-{identificador}";
         }
 
@@ -192,16 +202,16 @@ public class ClienteControler {
         int result = value * v;
         material.setCustoTotal("R$ "+ String.valueOf(result));
 
-        String valor = String.valueOf(v);
-        String format = "R$ " + valor;
+        String format = "R$ " + String.valueOf(v);
 
-        material.setQuantMaterial(String.valueOf(value));
         material.setValorMaterial(format);
         materialService.salvarMaterial(material);
 
         Servico servico = servicoService.encontrarServicoPorId(identificador);
-
-        servicoService.salvarServico(clonarServicoComMaterialAtualizado(servico, material));
+        List<Material> lista = servico.getMateriais();
+        lista.add(material);
+        servico.setMateriais(lista);
+        servicoService.salvarServico(servico);
 
         servico.setTotalMateriais(somarCustoTotalServico(calcularCustoTotal(servico.getMateriais())));
         servicoService.salvarServico(servico);
@@ -229,6 +239,7 @@ public class ClienteControler {
 
     @GetMapping("/deletarServico")
     public String deleteServico(Long identificador){
+
         Cliente cliente = clienteService.encontrarClientePorId(iden);
         Servico servico = servicoService.encontrarServicoPorId(identificador);
 
@@ -264,34 +275,6 @@ public class ClienteControler {
         return "redirect:/service-" + idService;
     }
 
-    private Cliente clonarClienteComServicosAtualizado(Servico servico, Cliente clienteAtual){
-
-        List<Servico> servicosAntigos = clienteAtual.getServicos();
-        servicosAntigos.add(servico);
-
-        Cliente clienteNovo = new Cliente();
-
-        clienteNovo.setId(clienteAtual.getId());
-        clienteNovo.setNome(clienteAtual.getNome());
-        clienteNovo.setTelefone(clienteAtual.getTelefone());
-        clienteNovo.setBairro(clienteAtual.getBairro());
-        clienteNovo.setEndereco(clienteAtual.getEndereco());
-        clienteNovo.setDataCadastro(clienteAtual.getDataCadastro());
-        clienteNovo.setServicos(servicosAntigos);
-
-        return clienteNovo;
-    }
-
-    private Servico clonarServicoComMaterialAtualizado(Servico servico, Material material){
-
-        List<Material> materiaisAntigos = servico.getMateriais();
-        materiaisAntigos.add(material);
-
-        servico.setMateriais(materiaisAntigos);
-
-        return servico;
-    }
-
     private List<Material> calcularCustoTotal(List<Material> materiais){
 
         for(int i=0; i<materiais.size(); i++){
@@ -322,24 +305,6 @@ public class ClienteControler {
 
         String formatCustoTotal = "R$ " + String.valueOf(soma);
         return formatCustoTotal;
-    }
-
-    private int somarTudoRetornarInt(List<Material> materiais){
-
-        int soma = 0;
-
-        for(int i=0; i<materiais.size(); i++){
-
-            String replace = materiais.get(i).getCustoTotal().replace("R$ ", "");
-
-            int valor = Integer.valueOf(replace);
-            soma += valor;
-
-            continue;
-        }
-
-        log.info(soma);
-        return soma;
     }
 
 }

@@ -38,59 +38,59 @@ public class Cliente {
     @Column
     private LocalDate dataCadastro;
 
-    public Long getId() {
+        public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+        public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNome() {
+        public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+        public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public String getTelefone() {
+        public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+        public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    public String getBairro() {
+        public String getBairro() {
         return bairro;
     }
 
-    public void setBairro(String bairro) {
+        public void setBairro(String bairro) {
         this.bairro = bairro;
     }
 
-    public String getEndereco() {
+        public String getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+        public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
 
-    public LocalDate getDataCadastro() {
+        public LocalDate getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(LocalDate dataCadastro) {
+        public void setDataCadastro(LocalDate dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
 
-    public List<Servico> getServicos() {
+        public List<Servico> getServicos() {
         return servicos;
     }
 
-    public void setServicos(List<Servico> servicos) {
+        public void setServicos(List<Servico> servicos) {
         this.servicos = servicos;
     }
 }

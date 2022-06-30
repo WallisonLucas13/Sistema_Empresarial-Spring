@@ -11,33 +11,33 @@ import java.util.List;
 @Table(name = "servico")
 public class Servico {
 
-        @Id
-        @GeneratedValue(generator = "increment")
-        @GenericGenerator(name = "increment", strategy = "increment")
-        private Long identificador;
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    private Long identificador;
 
-        @Column
-        @NotBlank
-        private String nomeServico;
+    @Column
+    @NotBlank
+    private String nomeServico;
 
-        @Column
-        @NotBlank
-        private String desServico;
+    @Column
+    @NotBlank
+    private String desServico;
 
-        @Column
-        private LocalDate dateService;
+    @Column
+    private LocalDate dateService;
 
-        @Column
-        private String custoServicoFinal = "R$ 0";
+    @Column
+    private String custoServicoFinal = "R$ 0";
 
-        @Column
-        private String totalMateriais = "R$ 0";
+    @Column
+    private String totalMateriais = "R$ 0";
 
-        @Column
-        private String maoDeObra = "R$ 0";
+    @Column
+    private String maoDeObra = "R$ 0";
 
-        @OneToMany(cascade = CascadeType.ALL)
-        private List<Material> materiais;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Material> materiais;
 
         public String getNomeServico() {
             return nomeServico;
@@ -67,39 +67,39 @@ public class Servico {
             this.materiais = materiais;
         }
 
-    public LocalDate getDateService() {
+        public LocalDate getDateService() {
         return dateService;
     }
 
-    public void setDateService(LocalDate dateService) {
+        public void setDateService(LocalDate dateService) {
         this.dateService = dateService;
     }
 
-    public Long getIdentificador() {
+        public Long getIdentificador() {
         return identificador;
     }
 
-    public String getCustoServicoFinal() {
+        public String getCustoServicoFinal() {
         return custoServicoFinal;
     }
 
-    public void setCustoServicoFinal(String custoServicoFinal) {
+        public void setCustoServicoFinal(String custoServicoFinal) {
         this.custoServicoFinal = custoServicoFinal;
     }
 
-    public String getTotalMateriais() {
+        public String getTotalMateriais() {
         return totalMateriais;
     }
 
-    public void setTotalMateriais(String totalMateriais) {
+        public void setTotalMateriais(String totalMateriais) {
         this.totalMateriais = totalMateriais;
     }
 
-    public String getMaoDeObra() {
+        public String getMaoDeObra() {
         return maoDeObra;
     }
 
-    public void setMaoDeObra(String maoDeObra) {
+        public void setMaoDeObra(String maoDeObra) {
         this.maoDeObra = maoDeObra;
     }
 }

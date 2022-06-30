@@ -28,39 +28,39 @@ public class Material {
     @Column
     private String custoTotal;
 
-    public Long getId() {
+        public Long getId() {
         return id;
     }
 
-    public String getNomeMaterial() {
+        public String getNomeMaterial() {
         return nomeMaterial;
     }
 
-    public void setNomeMaterial(String nomeMaterial) {
+        public void setNomeMaterial(String nomeMaterial) {
         this.nomeMaterial = nomeMaterial;
     }
 
-    public String getQuantMaterial() {
+        public String getQuantMaterial() {
         return quantMaterial;
     }
 
-    public void setQuantMaterial(String quantMaterial) {
+        public void setQuantMaterial(String quantMaterial) {
         this.quantMaterial = quantMaterial;
     }
 
-    public String getValorMaterial() {
+        public String getValorMaterial() {
         return valorMaterial;
     }
 
-    public void setValorMaterial(String valorMaterial) {
+        public void setValorMaterial(String valorMaterial) {
         this.valorMaterial = valorMaterial;
     }
 
-    public String getCustoTotal() {
+        public String getCustoTotal() {
         return custoTotal;
     }
 
-    public void setCustoTotal(String custoTotal) {
+        public void setCustoTotal(String custoTotal) {
         this.custoTotal = custoTotal;
     }
 }
