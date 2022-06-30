@@ -39,6 +39,8 @@ top: 10px;
 
 #sumario-titulo{
 font-size: 16pt;
+position:relative;
+bottom: 10px;
 
 }
 
@@ -72,17 +74,18 @@ float: right;}
 
 #image-help{
 float: right;
+position:relative;
+left: 5px;
+top: 5px;
 }
 
 #sumario-delete{
 color:#b3404a;
 position:relative;
-top:5px;
 }
 
 #sumario-info{
 position:relative;
-top:5px;
 }
 
 #image-money{
