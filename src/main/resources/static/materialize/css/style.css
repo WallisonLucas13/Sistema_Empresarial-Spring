@@ -30,14 +30,15 @@ position:relative;
 #sumario{
 border-left: 3px solid #b3404a;
 padding:2px;
-width: 500px;
+width: 550px;
 border-radius: 15px;
-box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
-transition: all 0.3s ease-out;
-border-left: 3px solid #4895ff;
-background-color: #fbfafb;
-position:relative;
-margin:auto;
+position: relative;
+top: 10px;
+}
+
+#sumario-titulo{
+font-size: 16pt;
+
 }
 
 #serviceCard{
